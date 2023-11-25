@@ -1,0 +1,30 @@
+{
+    "name": "advent-of-code-2023",
+    "version": "1.0.0",
+    "description": "Solutions to Advent of Code 2023, written in Javascript",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/davidolivefarga/advent-of-code-2023.git"
+    },
+    "scripts": {
+        "solution": "node scripts/solution",
+        "create-files": "node scripts/create-files",
+        "add-stars": "node scripts/add-stars"
+    },
+    "devDependencies": {
+        "dotenv": "^10.0.0"
+    },
+    "keywords": [
+        "aoc",
+        "aoc-2023",
+        "aoc-2023-solutions",
+        "advent-of-code",
+        "advent-of-code-2023",
+        "advent-of-code-2023-solutions"
+    ],
+    "engines": {
+        "node": ">=16.3.1"
+    },
+    "author": "David Olivé",
+    "license": "MIT"
+}
