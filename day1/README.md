@@ -9,12 +9,14 @@ A list of strings composed of numbers from 1 to 9 and lower-case letters.
 Example:
 
 ```js
-1abc2
-pqr3stu8vwx
-treb7uchet
-two1nine
-abcone2threexyz
-xtwone3four
+const input = [
+    "1abc2",
+    "pqr3stu8vwx",
+    "treb7uchet",
+    "two1nine",
+    "abcone2threexyz",
+    "xtwone3four",
+];
 ```
 
 ## 🧩 First puzzle
