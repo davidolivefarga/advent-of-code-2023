@@ -4,7 +4,9 @@ You can find the puzzles [here](https://adventofcode.com/2023/day/1).
 
 ## ✍🏼 Input
 
-A list of strings composed of numbers from 1 to 9 and lower-case letters.
+In these puzzles we have a document consisting in several lines of text.
+
+Each line of text can contain the numbers from 1 to 9 and lower-case letters.
 
 Example:
 
@@ -23,7 +25,7 @@ const input = [
 
 ### Objective
 
-For each string, find the two-digit number obtained from combining the first digit and the last digit that appear in the string. For example, the string `a1b2c3d4e5f` would produce the number `15`.
+For each line, find the two-digit number obtained from combining the first digit and the last digit that appear in it. For example, the line `a1b2c3d4e5f` would produce the number `15`.
 
 Calculate the sum of all these numbers.
 
@@ -54,7 +56,7 @@ console.log(solve(input));
 
 ### Objective
 
-Same as the first puzzle, but this time the digits can also be represented as their name (`1` as `one`, `2` as `two`, and so on). For example, the string `7pqrstsixteen` would produce the number `76`.
+Same as the first puzzle, but this time the digits can also be represented as their name (`1` as `one`, `2` as `two`, and so on). For example, the line `7pqrstsixteen` would produce the number `76`.
 
 ### Solution
 
@@ -89,9 +91,9 @@ const lastDigit = line.match(
 )[1];
 ```
 
-The `.*` is a greedy quantifier that tries to match as many characters as possible. If we put it at the beginning of the regular expression it will match everything before the last digit, leaving the last digit in the capturing group, which is why we need to access the second element of the output array. Similarly, if we put it at the end of the string, it will match everything after the first digit, leaving the first digit in the capturing group.
+The `.*` is a greedy quantifier that tries to match as many characters as possible. If we put it at the beginning of the regular expression it will match everything before the last digit, leaving the last digit in the capturing group. Similarly, if we put it at the end of the string, it will match everything after the first digit, leaving the first digit in the capturing group. Since we're not interested in the capturing groups, we need to access the second element of the match output.
 
-The two-regex approach works, but I got obsessed with finding a way to get the first and last digit of the string with a singular regular expression. After some research, I learned that positive lookaheads don't consume characters, so we can use them to find all matches without caring if they overlap or not:
+The two-regex approach works, but I got obsessed with finding a way to get the first and last digit of the string with a singular regular expression. After some research, I learned that [positive lookaheads](https://www.regular-expressions.info/lookaround.html) don't consume characters, so we can use them to find all matches without caring if they overlap or not:
 
 ```js
 const digits = [
@@ -99,7 +101,7 @@ const digits = [
 ].map((match) => match[1]);
 ```
 
-This might be more performant, but I think it's quite hard to read. Since I didn't have any performance issues with the two-regular-expressions approach, I decided to stick with it as I feel it's more readable and easier to maintain.
+I'm not sure if that is more performant, but I think it's hard to read and understand. Since I didn't have any performance issues with the two regular expressions approach, I decided to stick with it.
 
 ```js
 const input = require("./input");
