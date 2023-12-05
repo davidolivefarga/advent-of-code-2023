@@ -23,7 +23,7 @@
         "advent-of-code-2023-solutions"
     ],
     "engines": {
-        "node": ">=16.3.1"
+        "node": ">=20.5.1"
     },
     "author": "David Olivé",
     "license": "MIT"
