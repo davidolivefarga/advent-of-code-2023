@@ -98,7 +98,7 @@ Find the lowest location amongst all seed ranges provided in the input.
 
 Problems are getting harder! Applying the solution of the first puzzle to each seed in each range will be very slow, because the puzzle input has intentionally picked very large numbers... So we have to think of a better solution.
 
-The idea is that instead of mapping each seed individually, we can map ranges of seeds. To get the idea, imagine that your range of seeds is `[1, 10]`, and the next map has a single instruction that tells you that the range `[1, 5]` will be mapped to the range `[21, 25]`. This means that your range of seeds will be mapped to the ranges `[21, 25]` and `[6, 10]` (which remains unstransformed because it wasn't covered by any map instruction).
+The idea is that instead of mapping each seed individually, we can map ranges of seeds. To get the idea, imagine that your range of seeds is `[1, 10]`, and the next map has a single instruction that tells you that the range `[1, 5]` will be mapped to the range `[21, 25]`. This means that your range of seeds will be mapped to the ranges `[21, 25]` and `[6, 10]` (which remains untransformed because it wasn't covered by any map instruction).
 
 Now that we have the general idea, let's see the outline of the solution:
 
@@ -111,9 +111,9 @@ The complicated stuff happens in Step 3, but I added comments in the code to fac
 
 Imagine that we have a range `x` that needs to be mapped using a map with several instructions, each represented by a range `y_i`. Some of these ranges might not intersect with `x`, so we can safely discard them as they won't impact the mapping of `x`. Also, since we sorted the `y_i` ranges and they are disjoint (otherwise the problem would be ambiguous), we can iterate through them from left-to-right without worrying about overlaps.
 
-The idea is to divide `x` in sub-ranges, some of which will be within one of the `y_i` ranges and will be transformed accordingly and some of which will not be covered by any `y_i` and will therefore remain untransformed.
+The idea is to divide `x` in sub-ranges, some of which will be within one of the `y_i` ranges and will be transformed accordingly and some of which will not be covered by any `y_i` ranges and will therefore remain untransformed.
 
-Let's grab the first `y_i` interval that intersects `x` (let's call it `y1`) and see all the possible intersection cases to see if we can find a common pattern. Notice that in each of them I put a `^` symbol to keep track of the current position, as we'll be traversing `x` left-to-right.
+Let's grab the first `y_i` range that intersects `x` (let's call it `y1`) and see all the possible intersection cases to see if we can find a common pattern. Notice that in each of them I put a `^` symbol to keep track of the current position, as we'll be traversing `x` left-to-right.
 
 ```
 Scenario 1:
@@ -143,7 +143,7 @@ Scenario 4:
 
 In scenarios 2 and 4 we have a part of `x` that is not covered by `y1`: `[x.start, y1.start - 1]`. This will be one of the sub-ranges that remains untransformed.
 
-Now we can move the current position to `y1.start - 1`, so that our scenarios will look like:
+Now we can move the current position to `y1.start` in these cases, so that our scenarios will look like this:
 
 ```
 Scenario 1:
@@ -171,9 +171,9 @@ Scenario 4:
        ^
 ```
 
-Next, in all scenarios we can get the intersection between `x` and `y1`, corresponding to the range `[^, min(x.end, y1.end)]`. This will be another of the sub-ranges, but this time it will get transformed according to the map instructions represented by `y1` (we just need to calculate a delta and move the interval according to it, nothing complicated).
+Next, in all scenarios we can get the intersection between `x` and `y1`, corresponding to the range `[^, min(x.end, y1.end)]`. This will be another of the sub-ranges, but this time it will get transformed according to the map instructions represented by `y1` (we just need to calculate a delta and move the range according to it, nothing complicated).
 
-Now we can move the current position accordingly, so that our scenarios will look like:
+Now we can move the current position accordingly, so that our scenarios will look like this:
 
 ```
 Scenario 1:
@@ -201,7 +201,7 @@ Scenario 4:
                  ^
 ```
 
-In scenarios 2 and 3 we're done, because we reached the end of `x`. However, in scenarios 1 and 4 we might have other intervals to process, so we would repeat the same thing we did with `y1` but this time with `y2`, keeping the value of `^` to know where we are. This will continue until we have no `y_i` left.
+In scenarios 2 and 3 we're done, because we reached the end of `x`. However, in scenarios 1 and 4 we might have other ranges to process, so we would repeat the same thing we did with `y1` but this time with the next range, `y2`, keeping the value of `^` to know where we are. This will continue until we have no `y_i` left.
 
 Finally, once there are no `y_i` left, it's possible that there's still a part of `x` that haven't been covered, for example:
 
