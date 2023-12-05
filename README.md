@@ -55,9 +55,10 @@ There are three commands:
 
 Here's the list of all days, along with the stars obtained in each of them.
 
-| Day                             |  Stars  |
-| :------------------------------ | :-----: |
-| [Day 1: Trebuchet?!](./day1)    | ⭐️ ⭐️ |
-| [Day 2: Cube Conundrum](./day2) | ⭐️ ⭐️ |
-| [Day 3: Gear Ratios](./day3)    | ⭐️ ⭐️ |
-| [Day 4: Scratchcards](./day4)   | ⭐️ ⭐️ |
+| Day                                              |  Stars  |
+| :----------------------------------------------- | :-----: |
+| [Day 1: Trebuchet?!](./day1)                     | ⭐️ ⭐️ |
+| [Day 2: Cube Conundrum](./day2)                  | ⭐️ ⭐️ |
+| [Day 3: Gear Ratios](./day3)                     | ⭐️ ⭐️ |
+| [Day 4: Scratchcards](./day4)                    | ⭐️ ⭐️ |
+| [Day 5: If You Give A Seed A Fertilizer](./day5) | ⭐️ ⭐️ |
