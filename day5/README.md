@@ -107,61 +107,110 @@ Now that we have the general idea, let's see the outline of the solution:
 3. Starting with the seed ranges, use all maps to start them to other kind of ranges until we have the location ranges.
 4. Find the minimum location by grabbing the start of all location ranges and getting the smallest one.
 
-The complicated stuff happens in Step 3, but I added comments to facilitate its comprehension.
+The complicated stuff happens in Step 3, but I added comments in the code to facilitate its comprehension.
 
-Let's see an example.
+Imagine that we have a range `x` that needs to be mapped using a map with several instructions, each represented by a range `y_i`. Some of these ranges might not intersect with `x`, so we can safely discard them as they won't impact the mapping of `x`. Also, since we sorted the `y_i` ranges and they are disjoint (otherwise the problem would be ambiguous), we can iterate through them from left-to-right without worrying about overlaps.
 
-Imagine that we have a range `x` that needs to be mapped using a map with four instructions, each representing a range: `y1`, `y2`, `y3` and `y4`. To avoid ambiguities, the problem guaratees that the `y_i` ranges are disjoint. Also, they are sorted because we sorted them in Step 2.
+The idea is to divide `x` in sub-ranges, some of which will be within one of the `y_i` ranges and will be transformed accordingly and some of which will not be covered by any `y_i` and will therefore remain untransformed.
 
-Hence, we might have a situation like this one:
-
-```
-[· range y1 ·]     [· range y2 ·]     [· range y3 ·]     [· range y4 ·]
-
-                [·············· range x ··············]
-```
-
-The first step is to get rid of the ranges that do not intersect `x`, as they will have no impact on its mapping. Also, let's keep track of the current position (indicated as a `^` in the diagrams) and initialise it to `x.start`:
+Let's grab the first `y_i` interval that intersects `x` (let's call it `y1`) and see all the possible intersection cases to see if we can find a common pattern. Notice that in each of them I put a `^` symbol to keep track of the current position, as we'll be traversing `x` left-to-right.
 
 ```
-   [· range y2 ·]     [· range y3 ·]
+Scenario 1:
 
-[·············· range x ··············]
-^
+[····· y1 ·····]
+    [····· x ·····]
+    ^
+
+Scenario 2:
+        [····· y1 ·····]
+    [····· x ·····]
+    ^
+
+Scenario 3:
+
+[········· y1 ·········]
+    [····· x ·····]
+    ^
+
+Scenario 4:
+
+       [·· y1 ··]
+    [····· x ·····]
+    ^
 ```
 
-Now, let's focus on range `x` and range `y2`. The left part of `x` is not covered by `y2`, so this means that it will remain untransformed. Hence, we already have one mapped range, `[x.start, y2.start - 1]`, and we can advance the current position to `y2.start`.
+In scenarios 2 and 4 we have a part of `x` that is not covered by `y1`: `[x.start, y1.start - 1]`. This will be one of the sub-ranges that remains untransformed.
+
+Now we can move the current position to `y1.start - 1`, so that our scenarios will look like:
 
 ```
-   [· range y2 ·]     [· range y3 ·]
+Scenario 1:
 
-[·············· range x ··············]
-   ^
+[····· y1 ·····]
+    [····· x ·····]
+    ^
+
+Scenario 2:
+        [····· y1 ·····]
+    [····· x ·····]
+        ^
+
+Scenario 3:
+
+[········· y1 ·········]
+    [····· x ·····]
+    ^
+
+Scenario 4:
+
+       [·· y1 ··]
+    [····· x ·····]
+       ^
 ```
 
-Then, we have another mapped range, the intersection between `x` and `y2`: `[y2.start + delta, y2.end + delta]` (`delta` is calculated based on the instruction represented by `y2`.). This means that we can advance the current position to `y2.end + 1`.
+Next, in all scenarios we can get the intersection between `x` and `y1`, corresponding to the range `[^, min(x.end, y1.end)]`. This will be another of the sub-ranges, but this time it will get transformed according to the map instructions represented by `y1` (we just need to calculate a delta and move the interval according to it, nothing complicated).
+
+Now we can move the current position accordingly, so that our scenarios will look like:
 
 ```
-   [· range y2 ·]     [· range y3 ·]
+Scenario 1:
 
-[·············· range x ··············]
+[····· y1 ·····]
+    [····· x ·····]
+                ^
+
+Scenario 2:
+        [····· y1 ·····]
+    [····· x ·····]
+                   ^
+
+Scenario 3:
+
+[········· y1 ·········]
+    [····· x ·····]
+                   ^
+
+Scenario 4:
+
+       [·· y1 ··]
+    [····· x ·····]
                  ^
 ```
 
-And now we repeat the algorithm, but this time focusing on range `x` and range `y3`, using the current position to know what has already been mapped. This will give us two new ranges: `[y2.end + 1, y3.start - 1]` and `[y3.start + delta, y3.end + delta]`.
+In scenarios 2 and 3 we're done, because we reached the end of `x`. However, in scenarios 1 and 4 we might have other intervals to process, so we would repeat the same thing we did with `y1` but this time with `y2`, keeping the value of `^` to know where we are. This will continue until we have no `y_i` left.
 
-Once we've gone through all `y_i` ranges, it's possible that we still have a part of `x` that hasn't been mapped yet:
+Finally, once there are no `y_i` left, it's possible that there's still a part of `x` that haven't been covered, for example:
 
 ```
-   [· range y2 ·]     [· range y3 ·]
-
-[·············· range x ··············]
-                                    ^
+[····· y1 ·····]   [····· y2 ·····]
+    [··············· x ···············]
+                                   ^
 ```
 
-Hence, we have one final range that will remain untransformed, `[y3.end + 1, x.end]`.
+In these cases, we'll have one more sub-range, `[^, x.end]`, that will remain untransformed.
 
-Of course, in this example we haven't covered all edge cases. For example, it's possible that `x` is fully covered by the `y_i`, but this can easily be covered by checking the relative position between the ranges.
+With these ideas in mind, coding the solution is not that hard.
 
 ```js
 const input = require("./input");
