@@ -88,7 +88,7 @@ console.log(solve(input));
 
 ### Objective
 
-Same situation as before, but this time the seeds from the input represent ranges. Each pair of seeds generates a range where the first seed is the start of the range and the second value is the length of the range. For example, if the initial seeds input is `[79, 14, 55, 13]`, this means we have we will have two ranges of seeds: `[79, 79 + 14 - 1]` and `[55, 55 + 13 - 1]`.
+Same situation as before, but this time the seeds from the input represent ranges. Each pair of seeds generates a range where the first seed is the start of the range and the second value is the length of the range. For example, if the initial seeds input is `[79, 14, 55, 13]`, this means that we will have two ranges of seeds: `[79, 79 + 14 - 1]` and `[55, 55 + 13 - 1]`.
 
 Using the maps from the input, we can convert the seeds within these ranges to locations.
 
@@ -104,7 +104,7 @@ Now that we have the general idea, let's see the outline of the solution:
 
 1. Generate the seed ranges from the input.
 2. Preemptively sort the input maps (this will be important for the range mapping logic, as you will see later).
-3. Starting with the seed ranges, use all maps to start them to other kind of ranges until we have the location ranges.
+3. Starting with the seed ranges, use all maps to map them to other kind of ranges until we have the location ranges.
 4. Find the minimum location by grabbing the start of all location ranges and getting the smallest one.
 
 The complicated stuff happens in Step 3, but I added comments in the code to facilitate its comprehension.
