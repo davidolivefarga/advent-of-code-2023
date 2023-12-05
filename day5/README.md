@@ -283,6 +283,8 @@ function convert(ranges, map) {
             }
         );
 
+        // If there's still a part of the range that hasn't been covered,
+        // add it without transforming it.
         if (currentPosition <= right) {
             convertedRanges.push([currentPosition, right]);
         }
