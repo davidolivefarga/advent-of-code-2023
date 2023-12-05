@@ -111,7 +111,7 @@ The complicated stuff happens in Step 3, but I added comments to facilitate its 
 
 Let's see an example.
 
-Imagine that we have a range `x` that needs to be mapped using a map with four instructions, each representing a range: `y1`, `y2`, `y3` and `y4`. To avoid ambiguities, the problem guaratees that the `y_i` intervals are disjoint. Also, they are sorted because we sorted them in Step 2.
+Imagine that we have a range `x` that needs to be mapped using a map with four instructions, each representing a range: `y1`, `y2`, `y3` and `y4`. To avoid ambiguities, the problem guaratees that the `y_i` ranges are disjoint. Also, they are sorted because we sorted them in Step 2.
 
 Hence, we might have a situation like this one:
 
@@ -130,7 +130,7 @@ The first step is to get rid of the ranges that do not intersect `x`, as they wi
 ^
 ```
 
-Now, let's focus on range `x` and range `y2`. The left part of `x` is not covered by `y2`, so this means that it will remain untransformed. Hence, we already have one mapped interval, `[x.start, y2.start - 1]`, and we can advance the current position to `y2.start`.
+Now, let's focus on range `x` and range `y2`. The left part of `x` is not covered by `y2`, so this means that it will remain untransformed. Hence, we already have one mapped range, `[x.start, y2.start - 1]`, and we can advance the current position to `y2.start`.
 
 ```
    [· range y2 ·]     [· range y3 ·]
@@ -139,7 +139,7 @@ Now, let's focus on range `x` and range `y2`. The left part of `x` is not covere
    ^
 ```
 
-Then, we have another mapped interval, the intersection between `x` and `y2`: `[y2.start + delta, y2.end + delta]` (`delta` is calculated based on the instruction represented by `y2`.). This means that we can advance the current position to `y2.end + 1`.
+Then, we have another mapped range, the intersection between `x` and `y2`: `[y2.start + delta, y2.end + delta]` (`delta` is calculated based on the instruction represented by `y2`.). This means that we can advance the current position to `y2.end + 1`.
 
 ```
    [· range y2 ·]     [· range y3 ·]
@@ -148,7 +148,9 @@ Then, we have another mapped interval, the intersection between `x` and `y2`: `[
                  ^
 ```
 
-And now we repeat the algorithm, but this time focusing on range `x` and range `y3`, using the current positionto know what has already been mapped. Once we've gone through all `y_i` ranges, it's possible that we still have a part of the interval that hasn't been mapped yet:
+And now we repeat the algorithm, but this time focusing on range `x` and range `y3`, using the current position to know what has already been mapped. This will give us two new ranges: `[y2.end + 1, y3.start - 1]` and `[y3.start + delta, y3.end + delta]`.
+
+Once we've gone through all `y_i` ranges, it's possible that we still have a part of `x` that hasn't been mapped yet:
 
 ```
    [· range y2 ·]     [· range y3 ·]
@@ -157,7 +159,7 @@ And now we repeat the algorithm, but this time focusing on range `x` and range `
                                     ^
 ```
 
-Hence, we have one final interval that will remain untransformed, `[y3.end + 1, x.end]`.
+Hence, we have one final range that will remain untransformed, `[y3.end + 1, x.end]`.
 
 Of course, in this example we haven't covered all edge cases. For example, it's possible that `x` is fully covered by the `y_i`, but this can easily be covered by checking the relative position between the ranges.
 
