@@ -91,7 +91,7 @@ const lastDigit = line.match(
 )[1];
 ```
 
-The `.*` is a greedy quantifier that tries to match as many characters as possible. If we put it at the beginning of the regular expression it will match everything before the last digit, leaving the last digit in the capturing group. Similarly, if we put it at the end of the string, it will match everything after the first digit, leaving the first digit in the capturing group. Since we're not interested in the capturing groups, we need to access the second element of the match output.
+The `.*` is a greedy quantifier that tries to match as many characters as possible. If we put it at the beginning of the regular expression it will match everything before the last digit, leaving the last digit in the capturing group. Similarly, if we put it at the end of the string, it will match everything after the first digit, leaving the first digit in the capturing group. Since we're now interested in the capturing groups, we need to access the second element of the match output.
 
 The two-regex approach works, but I got obsessed with finding a way to get the first and last digit of the string with a singular regular expression. After some research, I learned that [positive lookaheads](https://www.regular-expressions.info/lookaround.html) don't consume characters, so we can use them to find all matches without caring if they overlap or not:
 
@@ -101,7 +101,7 @@ const digits = [
 ].map((match) => match[1]);
 ```
 
-I'm not sure if that is more performant, but I think it's hard to read and understand. Since I didn't have any performance issues with the two regular expressions approach, I decided to stick with it.
+I'm not sure if that is more performant, but I think it's harder to read and understand. Since I didn't have any performance issues with the two regular expressions approach, I decided to stick with it.
 
 ```js
 const input = require("./input");
