@@ -62,3 +62,4 @@ Here's the list of all days, along with the stars obtained in each of them.
 | [Day 3: Gear Ratios](./day3)                     | ⭐️ ⭐️ |
 | [Day 4: Scratchcards](./day4)                    | ⭐️ ⭐️ |
 | [Day 5: If You Give A Seed A Fertilizer](./day5) | ⭐️ ⭐️ |
+| [Day 6: Wait For It](./day6)                     | ⭐️ ⭐️ |
