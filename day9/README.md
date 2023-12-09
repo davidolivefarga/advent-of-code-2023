@@ -65,7 +65,7 @@ a         b         c         x
 
 Since we know that at some point we'll reach a row with all zeroes, this means that the last row must only contain a zero. Hence, we know that `x - 3c + 3b - a = 0`, which can be rewritten as `x = 3c - 3b + a`.
 
-The coefficients in the expression we found are well-known, they are the binomial coefficients: `x = (3 1) * c - (3 2) * b + (3 3) * a`. It's no surprise they appear here, because the way we build the rows is very similar to the way we build Pascal's triangle, which can be used to calculate the binomial coefficients. The only catch is that in our expression we're alternating sides, as in each row we're computing differences instead of sums.
+The coefficients in the expression we found are well-known, they are the [binomial coefficients](https://en.wikipedia.org/wiki/Binomial_coefficient): `x = (3 1) * c - (3 2) * b + (3 3) * a`. It's no surprise they appear here, because the way we build the rows is very similar to the way we build [Pascal's triangle](https://en.wikipedia.org/wiki/Pascal%27s_triangle), which can be used to calculate the binomial coefficients. The only catch is that in our expression we're alternating signs, as in each row we're computing differences instead of sums.
 
 In general, if our history is `[h_1, ..., h_n]`, the extrapolated value will look like:
 
@@ -156,7 +156,7 @@ Again, the last value must be a zero, so we have `c - 3b + 3a - x = 0`, which ca
 In general, if our history is `[h_1, ..., h_n]`, the extrapolated value will look like:
 
 ```
-x = (n 1) * h_1  - (n 2) * h_2 + (n 3) * h_3 - ...
+x = (n 1) * h_1 - (n 2) * h_2 + (n 3) * h_3 - ...
 ```
 
 ```js
