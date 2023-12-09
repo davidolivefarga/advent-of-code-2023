@@ -72,7 +72,8 @@ Same situation as before, but this time we have several starting nodes (those en
 
 Very disappointed with this problem, because the intended solution relies on a couple assumptions that are not true in general:
 
--   Each starting node will only reach an end node
+-   Each starting node will only reach one end node
+-   The instruction index in which a starting node reaches its end node is the same for all starting nodes
 -   The amount of steps it takes for a starting node to reach its end node is the same amount of steps it takes for the end node to reach itself
 
 With these two assumptions the problem is quite easy, we just need to get the amount of steps it takes to reach the end node from every starting node and calculate the LCM (least common multiplier) of all these values. Without these assumptions the problem becomes much more complicated, and would probably require using the Chinese Reminder Theorem to solve a bunch of congruences.
