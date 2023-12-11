@@ -66,3 +66,4 @@ Here's the list of all days, along with the stars obtained in each of them.
 | [Day 7: Camel Cards](./day7)                     | ⭐️ ⭐️ |
 | [Day 8: Haunted Wasteland](./day8)               | ⭐️ ⭐️ |
 | [Day 9: Mirage Maintenance](./day9)              | ⭐️ ⭐️ |
+| [Day 10: Pipe Maze](./day10)                     | ⭐️ ⭐️ |
