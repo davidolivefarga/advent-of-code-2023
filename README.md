@@ -70,3 +70,4 @@ Here's the list of all days, along with the stars obtained in each of them.
 | [Day 11: Cosmic Expansion](./day11)              | ⭐️ ⭐️ |
 | [Day 12: Hot Springs](./day12)                   | ⭐️ ⭐️ |
 | [Day 13: Point of Incidence](./day13)            | ⭐️ ⭐️ |
+| [Day 14: Parabolic Reflector Dish](./day14)      | ⭐️ ⭐️ |
