@@ -88,7 +88,7 @@ function solve({ instructions, nodes }) {
         getStepsToReachEndNode(n, instructions, nodes)
     );
 
-    return stepsToReachEndNode.reduce(hcf);
+    return stepsToReachEndNode.reduce(lcm);
 }
 
 function getStepsToReachEndNode(node, instructions, nodes) {
@@ -111,7 +111,7 @@ function getStepsToReachEndNode(node, instructions, nodes) {
     return stepCount;
 }
 
-function hcf(a, b) {
+function lcm(a, b) {
     return (a * b) / gcd(a, b);
 }
 
