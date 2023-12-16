@@ -71,3 +71,4 @@ Here's the list of all days, along with the stars obtained in each of them.
 | [Day 12: Hot Springs](./day12)                   | ⭐️ ⭐️ |
 | [Day 13: Point of Incidence](./day13)            | ⭐️ ⭐️ |
 | [Day 14: Parabolic Reflector Dish](./day14)      | ⭐️ ⭐️ |
+| [Day 15: Lens Library](./day15)                  | ⭐️ ⭐️ |
