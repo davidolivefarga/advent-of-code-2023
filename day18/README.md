@@ -38,7 +38,7 @@ Found the amount of dug tiles.
 
 ### Solution
 
-Very similar to [Advent of Code Day 18 Part 2](https://github.com/davidolivefarga/advent-of-code-2022/tree/master/day18#-second-puzzle).
+Very similar to [Advent of Code 2022, Day 18, Part 2](https://github.com/davidolivefarga/advent-of-code-2022/tree/master/day18#-second-puzzle).
 
 First of all we count the tiles that are part of the trench, and we keep track of its dimensions so that we can embed it in a rectangle that contains it but is expanded one tile on each side. Then, using a BFS, we can count the tiles that are outside the trench in that rectangle. The desired answer will be the area of the rectangle minus the tiles outside the trench.
 
@@ -188,7 +188,7 @@ With the rows and columns, we can divide the region enclosed by the digger path 
 11  . . . . . . . . . .
 ```
 
-Some of those regions will be inside the digger path, while others will be outside it. To know what kind of region we have, we can use the same technique we used in [Day 10 Part 2](https://github.com/davidolivefarga/advent-of-code-2023/tree/master/day10#-second-puzzle), the ray casting alogrithm. We pick a point inside the region and we apply the algorithm to determine if it's inside the digger path or outside. This requires either the list of vertical edges or the list of horizontal edges, depending the direction of the ray you case (in my case I chose the vertical ones).
+Some of those regions will be inside the digger path, while others will be outside it. To know what kind of region we have, we can use the same technique we used in [Advent of Code 2023, Day 10, Part 2](https://github.com/davidolivefarga/advent-of-code-2023/tree/master/day10#-second-puzzle), the ray casting alogrithm. We pick a point inside the region and we apply the algorithm to determine if it's inside the digger path or outside. This requires either the list of vertical edges or the list of horizontal edges, depending the direction of the ray you case (in my case I chose the vertical ones).
 
 At this point, we have the area enclosed by the path of the digger. However, to calculate the area enclosed by the trench, we need to add a bit more area, because there are some parts of the trench that we haven't counted yet:
 
