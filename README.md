@@ -74,3 +74,4 @@ Here's the list of all days, along with the stars obtained in each of them.
 | [Day 15: Lens Library](./day15)                  | ⭐️ ⭐️ |
 | [Day 16: The Floor Will Be Lava](./day16)        | ⭐️ ⭐️ |
 | [Day 17: Clumsy Crucible](./day17)               | ⭐️ ⭐️ |
+| [Day 18: Lavaduct Lagoon](./day18)               | ⭐️ ⭐️ |
