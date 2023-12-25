@@ -209,7 +209,7 @@ At this point, we have the area enclosed by the path of the digger. However, to 
 11  . . # # # # # # # #
 ```
 
-Each edge will contribute to its length multiplied by 0.5, and the end we will be left with 4 corners that didn't get covered by any of the edge contributions. Since each corner has an area of 0.5 \* 0.5 and we have 4 of them, we just need to add 1 more unit of the area to get the desired result.
+Each edge (vertical and horizontal) will contribute to its length multiplied by 0.5, and the end we will be left with 4 corners that didn't get covered by any of the edge contributions. Since each corner has an area of 0.5 \* 0.5 and we have 4 of them, we just need to add 1 more unit to the total area to get the desired result.
 
 ```js
 const input = require("./input");
